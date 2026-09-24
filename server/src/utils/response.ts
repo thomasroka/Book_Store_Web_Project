@@ -29,6 +29,10 @@ function walk<T>(value: T, origin: string): T {
     return value.map((item) => walk(item, origin)) as T;
   }
   if (value && typeof value === 'object') {
+    const candidate = value as { toJSON?: () => unknown };
+    if (typeof candidate.toJSON === 'function') {
+      return walk(candidate.toJSON() as T, origin);
+    }
     const out: Record<string, unknown> = {};
     for (const [key, val] of Object.entries(value as Record<string, unknown>)) {
       if (typeof val === 'string' && URL_KEY.test(key)) {
