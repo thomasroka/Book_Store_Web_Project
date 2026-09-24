@@ -63,8 +63,7 @@ export function Footer() {
       </div>
       <div className="border-t border-line">
         <div className="container-shell flex flex-col items-center justify-between gap-2 py-5 text-x-small text-muted sm:flex-row">
-          <p>© {new Date().getFullYear()} Leaf &amp; Ink Books. A student project.</p>
-          <p>Demo store — orders are simulated without payment processing.</p>
+          <p>© {new Date().getFullYear()} Leaf &amp; Ink Books.</p>
         </div>
       </div>
     </footer>
