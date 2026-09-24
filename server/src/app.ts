@@ -7,9 +7,17 @@ import { uploadsDir } from './middleware/upload.js';
 
 export const app = express();
 
+const allowedOrigins = env.clientUrl.split(',').map((origin) => origin.trim());
+
 app.use(
   cors({
-    origin: env.clientUrl,
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`Origin ${origin} not allowed by CORS.`));
+      }
+    },
     credentials: true,
   })
 );
